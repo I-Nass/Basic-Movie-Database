@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Movie Database</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 onclick="resetPageFromHeader()" >🎬 Basic Movie Database</h1> 
+            <p>Search for your favorite movies</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Enter movie title...">
+            <button id="searchButton">Search</button>
+            <button id="historyButton">View History</button>
+        </div>
+
+        <div id="welcomeModalOverlay" class="modal-overlay">
+            <div id="welcomeModal" class="modal-content">
+                <button class="modal-close-button">&times;</button>
+                <h2>Welcome to the Basic Movie Database!</h2>
+                <p>This project allows you to **search for movies** using the OMDb API and **view their detailed information**. You can also keep track of your **recently viewed movies** in a history section.</p>
+                <p>This is a **work in progress** and is being continuously improved. You might notice some movies don't have posters or have slightly inconsistent data due to the external API source.</p>
+                <p>Enjoy exploring the world of movies!</p>
+                <button id="closeModalBtn" class="modal-action-button">Got It!</button>
+            </div>
+        </div>
+
+        <div id="movieResultsContainer" class="movie-details"></div>
+        <div id="paginationControls" class="pagination"></div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

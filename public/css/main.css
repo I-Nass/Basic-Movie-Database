@@ -1,0 +1,517 @@
+/* public/css/main.css */
+
+/* --- Global Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #fff;
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    cursor: pointer; /* Keeps this to indicate clickability */
+    transition: color 0.2s;
+}
+
+header h1:hover {
+    color: #ff9800;
+}
+
+/* --- Search Section --- */
+.search-container {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+input {
+    width: 70%;
+    max-width: 400px;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    outline: none;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #ff9800;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #f57c00;
+}
+
+#historyButton {
+    background-color: #28a745;
+}
+
+#historyButton:hover {
+    background-color: #218838;
+}
+
+/* --- Messages --- */
+.loading, .no-results {
+    font-size: 1.2rem;
+    padding: 30px;
+    color: #ddd;
+}
+
+.error {
+    color: #ff5252;
+    font-weight: bold;
+    padding: 20px;
+    font-size: 1.2rem;
+}
+
+/* ------------------------------------ */
+/* Movie Listings Display (Search Results & History) */
+/* ------------------------------------ */
+
+#movieResultsContainer {
+    margin: 30px 0;
+    min-height: 300px; /* Provides a minimum height to prevent large jumps when content changes */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Vertically center loading/no results messages */
+    flex-direction: column;
+}
+
+/* This targets the actual grid container for movie cards */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 10px;
+}
+
+.movie-card {
+    background: #333;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    /* Use flex to push image and text apart, ensuring consistent spacing */
+    height: 100%; /* Ensure all cards in a row have equal height */
+    position: relative; /* For potential future absolute positioning of elements */
+}
+
+.movie-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 375px; /* Fixed height for consistent image size */
+    object-fit: cover;
+    border-bottom: 1px solid #444;
+    /* Added display block to remove any extra space below image */
+    display: block;
+    /* This is crucial for preventing layout shift by immediately reserving space */
+    content: ""; 
+}
+
+.movie-card h3 {
+    font-size: 1.2rem;
+    margin: 15px 10px 5px;
+    color: #fff;
+    line-height: 1.3;
+    /* Ensure title has a consistent height, can add min-height if needed for one-liners */
+    min-height: 1.3em; /* Example: ensure space for at least one line of text */
+}
+
+.movie-card p {
+    font-size: 0.95rem;
+    color: #ddd;
+    margin: 0 10px 15px;
+    /* Ensure year has consistent height */
+    min-height: 0.95em; /* Example: ensure space for at least one line of text */
+}
+
+.movie-card .viewed-date {
+    font-size: 0.8em;
+    color: #999;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    min-height: 0.8em; /* Ensure consistent height */
+}
+
+/* ------------------------------------ */
+/* Detailed Movie View */
+/* ------------------------------------ */
+
+.movie-detail-view {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 25px;
+    display: flex;
+    gap: 30px;
+    background: #252525;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    text-align: left;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.movie-detail-view .movie-poster {
+    flex-shrink: 0;
+}
+
+.movie-detail-view .movie-poster img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: block; /* Important for image rendering */
+}
+
+.movie-detail-view .movie-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.movie-detail-view h2 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: #ff9800;
+}
+
+.movie-detail-view .movie-meta {
+    font-size: 1.1rem;
+    color: #bbb;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.movie-detail-view .movie-meta span {
+    background-color: #444;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.movie-detail-view .genre-list {
+    font-size: 1rem;
+    font-style: italic;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.movie-detail-view .ratings-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.movie-detail-view .rating {
+    background-color: #444;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+}
+
+.movie-detail-view .rating-label {
+    font-weight: bold;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.movie-detail-view .rating-value {
+    color: #ff9800;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.movie-detail-view .plot-section {
+    margin-bottom: 20px;
+}
+
+.movie-detail-view .plot-section h3,
+.movie-detail-view .details-section h3 {
+    font-size: 1.4rem;
+    color: #ff9800;
+    margin-bottom: 10px;
+}
+
+.movie-detail-view .plot-section p {
+    line-height: 1.6;
+    color: #ddd;
+}
+
+.movie-detail-view .details-section p {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.movie-detail-view .details-section strong {
+    color: #fff;
+}
+
+.back-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    background-color: #6c757d;
+    margin-top: 20px;
+    width: auto;
+}
+
+.back-button:hover {
+    background-color: #5a6268;
+}
+
+/* ------------------------------------ */
+/* Pagination Styles */
+/* ------------------------------------ */
+
+#paginationControls {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+#paginationControls button {
+    padding: 10px 18px;
+    background-color: #333;
+    border: 1px solid #ff9800;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-width: 40px;
+}
+
+#paginationControls button.active {
+    background-color: #ff9800;
+    color: #1a1a1a;
+    font-weight: bold;
+}
+
+#paginationControls button:hover:not(.active) {
+    background-color: #444;
+}
+
+/* Modal overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark, semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top of everything */
+    opacity: 0; /* Start hidden */
+    visibility: hidden; /* Start hidden */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth fade in/out */
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #333; /* Dark background matching your theme */
+    color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px; /* Max width for the modal */
+    width: 90%; /* Responsive width */
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Soft shadow */
+    position: relative; /* For positioning the close button */
+    transform: translateY(-20px); /* Start slightly above for subtle animation */
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.show .modal-content {
+    transform: translateY(0); /* Slide into place */
+}
+
+.modal-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #ff9800; /* Accent color for title */
+}
+
+.modal-content p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+.modal-content p:last-of-type {
+    margin-bottom: 30px; /* More space before the action button */
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    line-height: 1;
+    padding: 5px;
+    transition: color 0.2s;
+}
+
+.modal-close-button:hover {
+    color: #ff5252; /* Red on hover for close */
+}
+
+.modal-action-button {
+    /* Reuses existing button styles, adjust if specific look is needed */
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    background-color: #ff9800; /* Use your primary button color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-action-button:hover {
+    background-color: #f57c00;
+}
+
+/* Responsive adjustments for modal */
+@media (max-width: 600px) {
+    .modal-content {
+        padding: 20px;
+        margin: 0 15px; /* Add horizontal margin */
+    }
+
+    .modal-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .modal-content p {
+        font-size: 0.9rem;
+    }
+}
+
+
+
+
+/* ------------------------------------ */
+/* Responsive Adjustments */
+/* ------------------------------------ */
+
+@media (max-width: 768px) {
+    .search-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    input {
+        width: 90%;
+        max-width: none;
+        margin-bottom: 10px;
+    }
+
+    .search-container button {
+        width: 90%;
+        max-width: 400px;
+    }
+
+    .movie-detail-view {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .movie-detail-view .movie-poster img {
+        max-width: 90%;
+        height: auto;
+    }
+
+    .movie-detail-view .movie-info {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .movie-detail-view h2 {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .movie-detail-view .movie-meta,
+    .movie-detail-view .ratings-container {
+        justify-content: center;
+    }
+
+    .movie-detail-view .plot-section p {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .movie-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .movie-card {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 280px;
+    }
+
+    #paginationControls button {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+}
